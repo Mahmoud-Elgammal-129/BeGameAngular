@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="fixed-top mb-5">
+        <div class="top-header d-flex align-items-center">
+          <div class="image">
+            <img src="assets/img/logo.png" alt="City Centre Almazza" class="img-fluid w-75">
+          </div>
+          <span class="text-white h6">City Center Almazza</span>
+        </div>
+        <header class="header">
+          <div class="left-section">        
+            <button class="back-button btn text-white">
+              <i class="fa-solid fa-angle-left" (click)="navigateToMission()"></i> Back 
+            </button> 
+          </div>
+          <div class="right-section">
+            <span class="points">{{ points }} pts</span>
+            <div class="dev d-flex justify-content-between w-25">
+              <i class="fas fs-3 fa-user-circle profile-icon" (click)="navigateToProfile()"></i>
+              <i class="fas fs-3 fa-bell" (click)="showNotifications()"></i>
+            </div>
+          </div>
+        </header>
+      </div>
+      <div class="task-list">
+        <p class="fw-bold text-muted ms-4">Complete the tasks, gain points and get rewards</p>
+        <div class="task-item" *ngFor="let task of tasks" (click)="selectTask(task)">
+          <div class="task-card card">
+            <div class="card-header d-flex align-items-center px-4 py-3 w-2 justify-content-center align-items-center m-auto">
+              <div class="task-icon-container">
+                <img src="assets/img/think.png" class="image" alt="Done" *ngIf="task.BX_Questions_Title_EN === 'Think and answer'" />
+                <i *ngIf="task.BX_Questions_Title_EN === 'Go & Explore'" class="fas fa-map-marker-alt task-icon"></i>
+                <i *ngIf="task.BX_Questions_Title_EN === 'Find & Scan'" class="fas fa-qrcode task-icon"></i>
+                <i *ngIf="task.BX_Questions_Title_EN === 'Spin The Wheel'" class="fas fa-spinner fa-spin task-icon"></i>
+                <i *ngIf="!['Think and answer', 'Go & Explore', 'Find & Scan', 'Spin The Wheel'].includes(task.BX_Questions_Title_EN)" class="fas fa-question-circle task-icon"></i>
+              </div>
+              <div class="task-text">
+                <h3 [innerHTML]="task.BX_Questions_Title_EN"></h3>
+                <p [innerHTML]="task.BX_Questions_Text_EN"></p>
+              </div>
+              <span class="points-badge">{{ task.BX_Questions_Correct_Point }} pts</span>
+            </div>
+            <div *ngIf="selectedTask === task">
+              <div class="task-detail">
+                <div class="card-body">
+                  <div *ngIf="task.BX_Questions_Type_ID_FK === 8">
+                    <p class="question-text" [innerHTML]="task.BX_Questions_Text_EN"></p>
+                    <div class="option" *ngFor="let detail of task.Questions_Details">
+                      <input type="radio" 
+                             [name]="'question' + task.BX_Questions_ID_PK" 
+                             [value]="detail.BX_Questions_Details_Value" 
+                             [(ngModel)]="selectedAnswer" 
+                             id="{{detail.BX_Questions_Details_Key}}">
+                      <label [for]="detail.BX_Questions_Details_Key" [innerHTML]="detail.BX_Questions_Details_Value"></label>
+                    </div>
+                  </div>
+                  <div *ngIf="task.BX_Questions_Type_ID_FK !== 8">
+                    <p class="question-text" [innerHTML]="task.BX_Questions_Text_EN"></p>
+                  </div>
+                  <div class="button-group">
+                    <button type="submit" (click)="submitAnswer()">
+                      <img src="assets/img/button.png" alt="Done" />
+                      <span class="button-text m-auto">Done</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="powered-by text-center m-3">Powered by Be Game</p>
+    </div>
+  </div>
+  <footer class="footer fixed-bottom">
+    <button (click)="navigateToHome()"><i class="fas fa-list"></i></button>
+    <button (click)="navigateToRanking()"><i class="fas fa-chart-bar"></i></button>
+    <button class="home-button position-relative" (click)="navigateToActivityTitle()">
+      <img src="assets/img/Path 8.svg" alt="" class="btn">
+      <div>
+        <i class="fas fa-home position-absolute"></i>
+      </div>
+    </button>
+    <button (click)="navigateToRewards()"><i class="fas fa-trophy"></i></button>
+    <button (click)="navigateToSignin()"><i class="fas fa-sync-alt"></i></button>
+  </footer>
+</div>
+<app-notifications [visible]="notificationVisible" (closeEvent)="onCloseNotification()"></app-notifications>

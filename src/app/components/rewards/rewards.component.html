@@ -1,0 +1,79 @@
+
+<div class="col-12">
+  <div class="top-header d-flex  align-items-center ">
+    <div class="image">
+      <img src="assets/img/logo.png" alt="City Centre Almazza" class="img-fluid w-75" >
+    </div>
+    <span class="text-white h6">City Center Almazza</span>
+  </div>
+  <header class="header">
+    <div class="left-section">        
+       <button class="back-button btn text-white">
+        <i class="fa-solid fa-angle-left" (click)="navigateToHome()"></i> Back 
+      </button> 
+    </div>
+   
+    <div class="right-section ">
+      <span class="points ">2500 pts</span>
+   
+      <div class="dev d-flex justify-content-between w-25">
+        <i class="fas fs-3 fa-user-circle profile-icon" (click)="navigateToProfile()"></i>
+        
+        <i class="fas fs-3 fa-bell" (click)="showNotifications()"></i>
+      </div>
+    </div>
+  </header>
+    <div class="rewards " style="background-image: url('assets/img/background.png'); background-size: cover;background-repeat: no-repeat; ">
+      <h2>Rewards</h2>
+      <p>Collect Points to Redeem Rewards</p>
+      <div class="reward-card  ">
+        <div class="image">
+          <img src="assets/img/eat1.png" alt="McDonalds Reward">
+        </div>
+        <div class="details  ">
+          <span class="title">Reward Title</span>
+          <span class="description ">Text description of reward and conditions for redemption</span>
+          <span class="value">Value or discount or final price... etc</span>
+        </div>
+        <span class="pointes">690 pts</span>
+      </div>
+      <div class="reward-card">
+        <div class="image">
+          <img src="assets/img/van2.png" alt="Fast and Furious Reward">
+        </div>
+        <div class="details">
+          <span class="title">Reward Title</span>
+          <span class="description">Text description of reward and conditions for redemption</span>
+          <span class="value">Value or discount or final price... etc</span>
+        </div>
+        <span class="pointes">690 pts</span>
+      </div>
+      <div class="reward-card">
+        <div class="image">
+          <img src="assets/img/eat2.png" alt="KFC Reward">
+        </div>
+        <div class="details">
+          <span class="title">Reward Title</span>
+          <span class="description">Text description of reward and conditions for redemption</span>
+          <span class="value">Value or discount or final price... etc</span>
+        </div>
+        <span class="pointes">690 pts</span>
+      </div>
+     <footer class="footer fixed-bottom">
+  <button (click)="navigateToHome()"><i class="fas fa-list"></i></button>
+  <button (click)="navigateToRanking()"><i class="fas fa-chart-bar"></i></button>
+  <button class="home-button position-relative" (click)="navigateToActivityTitle()">
+      <img src="assets/img/Path 8.svg" alt="" class="btn">
+    <div>
+      <i class="fas fa-home position-absolute  " ></i>
+    </div>
+</button>
+  <button (click)="navigateToRewards()"><i class="fas fs-4 fa-trophy"></i></button>
+  <button (click)="navigateToSignin()"><i class="fas fs-4 fa-sync-alt"></i></button>
+</footer>
+    </div>
+  </div>
+  <app-notifications 
+  [visible]="notificationVisible" 
+  (closeEvent)="onCloseNotification()">
+</app-notifications>
